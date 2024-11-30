@@ -1,72 +1,3 @@
-class Enemy {
-  float x, y;
-  float speed;
-  float health;
-
-  Enemy(float startX, float startY, float speed) {
-    this.x = startX;
-    this.y = startY;
-    this.speed = speed;
-    this.health = 30;
-  }
-
-  void move() {
-    // 水平移動，讓敵人沿著 x 軸前進
-    x += speed;
-  }
-
-  void display() {
-    fill(255, 0, 0);
-    ellipse(x, y, 20, 20); // 用紅色的圓圈代表敵人
-  }
-}
-class Tower {
-  float x, y;
-  float range;
-  float damage;
-  int rateOfFire;
-  int fireCooldown;
-  int durability;  // 耐久度屬性
-
-  Tower(float x, float y, float range) {
-    this.x = x;
-    this.y = y;
-    this.range = range;
-    this.damage = 10;
-    this.rateOfFire = 30;  // 每隔 30 幀攻擊一次
-    this.fireCooldown = 0;
-    this.durability = 18;   // 每個塔最多能攻擊 18 次也就是可以擊敗三個敵人
-  }
-
-  void shoot(ArrayList<Enemy> enemies) {
-    if (fireCooldown == 0 && durability > 0) {  // 檢查耐久度
-      for (Enemy enemy : enemies) {
-        float d = dist(x, y, enemy.x, enemy.y);
-        if (d < range) {  // 檢查敵人是否在範圍內
-          enemy.health -= damage;
-          fireCooldown = rateOfFire;
-          durability--;  // 每次攻擊後耐久度減少
-          break;
-        }
-      }
-    } else if (fireCooldown > 0) {
-      fireCooldown--;
-    }
-  }
-
-  void display() {
-    fill(0, 0, 255);
-    rect(x-10, y-10, 20, 20);  // 用藍色的方形代表防禦塔
-    noFill();
-    stroke(0, 0, 255);
-    ellipse(x, y, range * 2, range * 2);  // 畫出範圍
-  }
-
-  boolean isDestroyed() {
-    return durability <= 0;
-  }
-}
-
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 ArrayList<Tower> towers = new ArrayList<Tower>();
 int lives = 3;               // 玩家初始生命值
@@ -75,7 +6,7 @@ int kills = 0;               // 玩家消滅怪物數
 int enemySpawnInterval = 3000; // 敵人產出間隔時間（10 秒）
 int lastEnemySpawnTime = 0;     // 上次敵人產生的時間
 PFont TCfont;
-final int WIN_CONDITION = 3; // 勝利條件：消滅三隻怪物
+int WIN_CONDITION = 3; // 勝利條件：消滅三隻怪物
 
 void setup() {
   size(600, 400);
@@ -132,11 +63,6 @@ void draw() {
     Tower tower = towers.get(i);
     tower.shoot(enemies);
     tower.display();
-
-    // 如果塔耐久度為 0，移除防禦塔
-    if (tower.isDestroyed()) {
-      towers.remove(i);
-    }
   }
 }
 
