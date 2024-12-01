@@ -1,18 +1,21 @@
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 ArrayList<Tower> towers = new ArrayList<Tower>();
 int lives = 3;               // 玩家初始生命值
-int coins = 0;               // 玩家金幣數
+int coins = 10;               // 玩家金幣數
 int kills = 0;               // 玩家消滅怪物數
 int enemySpawnInterval = 3000; // 敵人產出間隔時間（10 秒）
 int lastEnemySpawnTime = 0;     // 上次敵人產生的時間
 PFont TCfont;
 int WIN_CONDITION = 3; // 勝利條件：消滅三隻怪物
+int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}}};
 
 void setup() {
   size(600, 400);
   TCfont = createFont("NotoSansTC-Regular.otf", 28); //建立字形庫
   textFont(TCfont);
-  towers.add(new Tower(300, 200, 100));  // 初始化防禦塔(x,y,range)
+  for(int i[] : towerPos[0]){
+    towers.add(new Tower(i[0], i[1]));
+  }
 }
 
 void draw() {
@@ -59,8 +62,7 @@ void draw() {
   }
 
   // 更新和顯示防禦塔
-  for (int i = towers.size() - 1; i >= 0; i--) {
-    Tower tower = towers.get(i);
+  for (Tower tower : towers) {
     tower.shoot(enemies);
     tower.display();
   }
@@ -76,9 +78,7 @@ void displayEndMessage(String message) {
 }
 
 void mousePressed() {
-  // 使用三枚金幣新增防禦塔
-  if (coins >= 3) {
-    towers.add(new Tower(mouseX, mouseY, 100));
-    coins -= 3;  // 扣除金幣
+  for(Tower tower : towers){
+    tower.mouse();
   }
 }
