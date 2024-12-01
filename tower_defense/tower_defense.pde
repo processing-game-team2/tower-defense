@@ -14,7 +14,7 @@ String endmessage = "";
 
 void setup() {
   size(600, 400);
-  TCfont = createFont("NotoSansTC-Regular.otf", 28); //建立字形庫
+  TCfont = createFont("NaikaiFont-Bold.ttf", 28); //建立字形庫
   textFont(TCfont);
   scene = 0;
 }
