@@ -1,84 +1,48 @@
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 ArrayList<Tower> towers = new ArrayList<Tower>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+PFont TCfont;
 int lives = 3;               // 玩家初始生命值
 int coins = 10;               // 玩家金幣數
 int kills = 0;               // 玩家消滅怪物數
 int enemySpawnInterval = 3000; // 敵人產出間隔時間（10 秒）
 int lastEnemySpawnTime = 0;     // 上次敵人產生的時間
-PFont TCfont;
 int WIN_CONDITION = 3; // 勝利條件：消滅三隻怪物
 int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}}};
+int scene; // 0開始畫面 1結束畫面 2~4遊戲畫面 
+String endmessage = "";
 
 void setup() {
   size(600, 400);
   TCfont = createFont("NotoSansTC-Regular.otf", 28); //建立字形庫
   textFont(TCfont);
-  for(int i[] : towerPos[0]){
-    towers.add(new Tower(i[0], i[1]));
-  }
+  scene = 0;
 }
 
 void draw() {
-  background(255);
-
-  // 檢查遊戲是否結束（勝利或失敗）
-  if (lives <= 0) {
-    displayEndMessage("遊戲結束");
-    return;
+  if(scene == 0){
+    menu();
   }
-  if (kills >= WIN_CONDITION) {
-    displayEndMessage("遊戲勝利");
-    return;
+  else if(scene == 1){
+    end();
   }
-
-  // 顯示生命值與金幣數
-  fill(0);
-  textSize(16);
-  text("生命值: " + lives, width - 120, 30);
-  text("金幣: " + coins, width - 120, 50);
-
-  // 生成敵人
-  if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {
-    enemies.add(new Enemy(0, 200, 2)); //(x,y,speed)
-    lastEnemySpawnTime = millis();         // 更新敵人生成時間
+  else{
+    game();
   }
-
-  // 更新和顯示敵人
-  for (int i = enemies.size() - 1; i >= 0; i--) {
-    Enemy enemy = enemies.get(i);
-    enemy.move();
-    enemy.display();
-
-    // 如果敵人到達螢幕右邊，扣除玩家生命值並移除敵人
-    if (enemy.x > width) {
-      lives--;
-      enemies.remove(i);
-    } else if (enemy.health <= 0) {
-      // 敵人被消滅，增加金幣與擊殺數，並移除敵人
-      coins++;
-      kills++;
-      enemies.remove(i);
-    }
-  }
-
-  // 更新和顯示防禦塔
-  for (Tower tower : towers) {
-    tower.shoot(enemies);
-    tower.display();
-  }
-}
-
-// 顯示結束訊息
-void displayEndMessage(String message) {
-  fill(0);
-  textSize(32);
-  textAlign(CENTER, CENTER);
-  text(message, width / 2, height / 2);
-  noLoop();  // 停止 draw() 的迴圈
 }
 
 void mousePressed() {
-  for(Tower tower : towers){
-    tower.mouse();
+  if(scene == 0){
+    if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height/2 - 50 && mouseY < height/2 + 50){
+      scene = 2;
+      game_init();
+    }
+  }
+  else if(scene == 1){
+  }
+  else{
+    for(Tower tower : towers){
+      tower.mouse(mouseX, mouseY);
+    }
   }
 }
