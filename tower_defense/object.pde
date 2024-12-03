@@ -11,11 +11,21 @@ class Enemy {
     this.health = 40;
   }
 
-  void move() {
+  void move1() {//for first level
     // 水平移動，讓敵人沿著 x 軸前進
     x += speed;
+    //println(x);
   }
-
+  void move2(){//for second level
+    println(x,y);
+    if(x<=100.0 && y==200.0) x+=speed;
+    else if(x==100.0 && y>=150.0) y-=speed;
+    else if(x<=150.0 && y==150.0) x+=speed;
+    else if(x==150.0 && y<=300.0) y+=speed+0.1;
+    else if(x<=250.0 && y==300.0) x+=speed;
+    else if(x==250.0 && y>=200.0) y-=speed;
+    else x+=speed;
+  }
   void display() {
     fill(255, 0, 0);
     ellipse(x, y, 20, 20); // 用紅色的圓圈代表敵人

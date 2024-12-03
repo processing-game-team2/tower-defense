@@ -6,17 +6,19 @@ void game(){
   textSize(16);
   text("生命值: " + lives, width - 120, 30);
   text("金幣: " + coins, width - 120, 50);
+  text("消滅敵人數: "+kills, width-120, 70);
 
   // 生成敵人
   if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {
-    enemies.add(new Enemy(0, 200, 2)); //(x,y,speed)
+    enemies.add(new Enemy(0, 200, 2)); //(敵人初始x,敵人初始y,speed)
     lastEnemySpawnTime = millis();         // 更新敵人生成時間
   }
 
-  // 更新和顯示敵人
+  // 更新和顯示敵人，及敵人移動
   for (int i = enemies.size() - 1; i >= 0; i--) {
     Enemy enemy = enemies.get(i);
-    enemy.move();
+    if(scene==2) enemy.move1();//first level
+    if(scene==3) enemy.move2();//second level
     enemy.display();
 
     // 如果敵人到達螢幕右邊，扣除玩家生命值並移除敵人
@@ -51,9 +53,14 @@ void game(){
     endmessage = "DEFEAT";
     scene = 1;
   }
-  if (kills >= WIN_CONDITION) {
-    endmessage = "VICTORY";
-    scene = 1;
+  if (kills >= enemyNumber[level]) {
+    level++;
+    if(level==1) scene=3;
+    if(level==2) scene=4;
+    if(level==3){//game end
+      endmessage = "VICTORY";
+      scene = 1;
+    }
   }
 }
 

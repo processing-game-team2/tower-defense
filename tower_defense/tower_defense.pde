@@ -5,9 +5,10 @@ PFont TCfont;
 int lives = 3;                  // 玩家初始生命值
 int coins = 10;                 // 玩家金幣數
 int kills = 0;                  // 玩家消滅怪物數
+int level = 0;                  // 目前關卡
 int enemySpawnInterval = 3000;  // 敵人產出間隔時間（10 秒）
 int lastEnemySpawnTime = 0;     // 上次敵人產生的時間
-int WIN_CONDITION = 3;          // 勝利條件：消滅三隻怪物
+int enemyNumber[] = {10,15,20};          // 勝利條件：每一關有多少數量的敵人
 int scene;                      // 0開始畫面 1結束畫面 2~4遊戲畫面 
 int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}}}; // 防禦塔位置
 String endmessage = "";         //遊戲結束訊息
