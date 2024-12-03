@@ -25,11 +25,11 @@ class Tower {
   int id;
   float x, y;
   float range;
-  float damage;
-  int rateOfFire;
-  int fireCooldown;
-  int type;
-  boolean option;
+  float damage; 
+  int rateOfFire; //子彈冷卻時間
+  int fireCooldown; //子彈冷卻計時器
+  int type; //0還沒蓋塔 1普通塔 2冰凍塔
+  boolean option; //是否顯示選單
 
   Tower(float x, float y) {
     this.x = x;
@@ -38,9 +38,10 @@ class Tower {
     this.option = false;
   }
 
+  // 建置防禦塔
   void type_change(int t){
     if(type!=0)return;
-    // 1
+    // 1普通塔，花費3
     if(t == 1 && type == 0 && coins >= 3){
       println("type1");
       range = 100;
@@ -69,6 +70,7 @@ class Tower {
     }
   }
 
+  // 畫選單
   void display_option(){
     if(option == false){
       return;
@@ -86,6 +88,7 @@ class Tower {
     }
   }
 
+  // 畫防禦塔
   void display() {
     if(type == 1){
       fill(0, 0, 255);
@@ -107,10 +110,14 @@ class Tower {
     }
   }
 
+  // 防禦塔點擊事件
   void mouse(int nowX, int nowY){
+    // 點擊防禦塔：關閉/開啟選單
     if(nowX > x-10 && nowX < x+10 && nowY > y-10 && nowY < y+10){
       option = !option;
     }
+
+    // 點擊選單，建立防禦塔
     if(option == true){
       if(nowX > x-35 && nowX < x-15 && nowY > y-35 && nowY < y-15){
         type_change(1);
@@ -121,15 +128,16 @@ class Tower {
 }
 
 class Bullet{
-  Tower from;
-  Enemy to;
-  int time, totaltime = 10;
+  Tower from; // 發射的防禦塔
+  Enemy to; // 目標敵人
+  int time, totaltime = 10; // 從防禦塔到敵人需要幾幀的時間
   Bullet(Tower from, Enemy to){
     this.from = from;
     this.to = to;
     time = totaltime;
   }
   
+  // 畫子彈，並回傳發射多久
   int show(){
     time--;
     float x = to.x + (from.x - to.x)/totaltime*(float)time;

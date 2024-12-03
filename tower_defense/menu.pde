@@ -1,3 +1,4 @@
+// 開始選單
 void menu(){
   background(255);
   fill(50);
@@ -8,6 +9,7 @@ void menu(){
   text("start!", width/2, height/2);
 }
 
+// 遊戲結束畫面
 void end(){
   background(255);
   fill(0);

@@ -37,9 +37,10 @@ void game(){
     tower.display();
   }
 
+  // 更新子彈
   for(int i = bullets.size() - 1; i >= 0; i--){
     Bullet bullet = bullets.get(i);
-    if(bullet.show() <= 0){
+    if(bullet.show() <= 0){ //子彈射到敵人
       bullet.to.health -= bullet.from.damage;
       bullets.remove(i);
     }
@@ -56,7 +57,9 @@ void game(){
   }
 }
 
+// 遊戲初始化
 void game_init(){
+  // 新增防禦塔
   for(int i[] : towerPos[scene-2]){
     towers.add(new Tower(i[0], i[1]));
   }

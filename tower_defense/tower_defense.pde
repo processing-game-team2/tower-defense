@@ -2,15 +2,15 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 PFont TCfont;
-int lives = 3;               // 玩家初始生命值
-int coins = 10;               // 玩家金幣數
-int kills = 0;               // 玩家消滅怪物數
-int enemySpawnInterval = 3000; // 敵人產出間隔時間（10 秒）
+int lives = 3;                  // 玩家初始生命值
+int coins = 10;                 // 玩家金幣數
+int kills = 0;                  // 玩家消滅怪物數
+int enemySpawnInterval = 3000;  // 敵人產出間隔時間（10 秒）
 int lastEnemySpawnTime = 0;     // 上次敵人產生的時間
-int WIN_CONDITION = 3; // 勝利條件：消滅三隻怪物
-int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}}};
-int scene; // 0開始畫面 1結束畫面 2~4遊戲畫面 
-String endmessage = "";
+int WIN_CONDITION = 3;          // 勝利條件：消滅三隻怪物
+int scene;                      // 0開始畫面 1結束畫面 2~4遊戲畫面 
+int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}}}; // 防禦塔位置
+String endmessage = "";         //遊戲結束訊息
 
 void setup() {
   size(600, 400);
@@ -32,14 +32,19 @@ void draw() {
 }
 
 void mousePressed() {
+  // 開始畫面點擊事件
   if(scene == 0){
     if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height/2 - 50 && mouseY < height/2 + 50){
       scene = 2;
       game_init();
     }
   }
+
+  // 結束畫面點擊事件
   else if(scene == 1){
   }
+
+  // 遊戲中點擊事件
   else{
     for(Tower tower : towers){
       tower.mouse(mouseX, mouseY);
