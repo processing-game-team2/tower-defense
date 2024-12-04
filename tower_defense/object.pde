@@ -107,13 +107,14 @@ class Tower {
     if(type == 0){
       fill(255);
       stroke(0);
-      circle(x-25, y-25, 20);
-      circle(x+25, y-25, 20);
+      // circle(x-25, y-25, 20);
+      // circle(x+25, y-25, 20);
+      circle(x, y-25, 20);
       textSize(20);
       fill(0);
       textAlign(CENTER, CENTER);
-      text("1", x-25, y-25);
-      text("2", x+25, y-25);
+      text("+", x, y-26);
+      // text("2", x+25, y-25);
     }
   }
 
@@ -148,7 +149,7 @@ class Tower {
 
     // 點擊選單，建立防禦塔
     if(option == true){
-      if(nowX > x-35 && nowX < x-15 && nowY > y-35 && nowY < y-15){
+      if(nowX > x-10 && nowX < x+10 && nowY > y-35 && nowY < y-15){
         type_change(1);
         option = false;
       }
