@@ -48,7 +48,6 @@ void mousePressed() {
     }
     else if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height - 375 && mouseY < height-275 && start==1){//選擇第一關
       scene=2;
-      image(level1,0,0,600,400);
       game_init();
     }
     else if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height - 250 && mouseY < height-150 && start==1){//選擇第二關

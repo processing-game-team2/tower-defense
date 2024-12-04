@@ -1,6 +1,9 @@
 void game(){
-  background(255);
-
+  //background
+  if(scene==2) image(level1,0,0,600,400);
+  if(scene==3) image(level2,0,0,600,400);
+  if(scene==4) image(level3,0,0,600,400);
+  
   // 顯示生命值與金幣數
   //leftenemy=enemyNumber
   fill(0);
@@ -8,7 +11,7 @@ void game(){
   text("生命值: " + lives, width - 120, 30);
   text("金幣: " + coins, width - 120, 50);
   text("剩餘敵人數: "+(enemyNumber[scene-2]-kills), width-120, 70);
-
+  
   // 生成敵人
   if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {
     enemies.add(new Enemy(0, 200, 2)); //(敵人初始x,敵人初始y,speed)
@@ -37,6 +40,7 @@ void game(){
   // 更新和顯示防禦塔
   for (Tower tower : towers) {
     tower.shoot(enemies);
+    
     tower.display();
   }
 
@@ -56,8 +60,17 @@ void game(){
   }
   if (kills >= enemyNumber[level]) {
     level++;
-    if(level==1) scene=3;
-    if(level==2) scene=4;
+    if(level==1){
+      //println("check");
+      start=0;
+      scene=0;
+      menu();
+    }
+    if(level==2){
+      start=0;
+      scene=0;
+      menu();
+    }
     if(level==3){//game end
       endmessage = "VICTORY";
       scene = 1;
