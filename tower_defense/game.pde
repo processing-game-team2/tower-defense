@@ -18,8 +18,20 @@ void game(){
   
   // 生成敵人
   if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {
-    enemies.add(new Enemy(0, 200, 2)); //(敵人初始x,敵人初始y,speed)
+    if(scene==13){
+        if(level3_entry==1) {
+          enemies.add(new Enemy(1.0, 120.0, 500.0, 2)); //(敵人初始x,敵人初始y,speed)
+          level3_entry=2;
+          lastEnemySpawnTime = millis();
+        }else if(level3_entry==2){
+          enemies.add(new Enemy(2.0, 290.0, 0.0, 2)); //(敵人初始x,敵人初始y,speed)
+          level3_entry=1;
+          lastEnemySpawnTime = millis();
+        }
+    }else{
+    enemies.add(new Enemy(1.0, 0, 200, 2)); //(敵人初始x,敵人初始y,speed)
     lastEnemySpawnTime = millis();         // 更新敵人生成時間
+    }
   }
 
   // 更新和顯示敵人，及敵人移動
@@ -61,7 +73,7 @@ void game(){
     endmessage = "DEFEAT";
     scene = 5;
   }
-  else if (kills >= enemyNumber[level]){//game end
+  else if (kills >= enemyNumber[scene-11]){//game end
     endmessage = "VICTORY";
     scene = 5;
   }

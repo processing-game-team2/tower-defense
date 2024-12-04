@@ -1,10 +1,11 @@
 class Enemy {
-  int id;
+  float id;
   float x, y;
   float speed;
   float health;
 
-  Enemy(float startX, float startY, float speed) {
+  Enemy(float id,float startX, float startY, float speed) {
+    this.id = id; //出現種類，以level3來說某條路來的怪是1，另一條是2，其餘目前沒差
     this.x = startX;
     this.y = startY;
     this.speed = speed;
@@ -28,6 +29,17 @@ class Enemy {
       else if(x<250.0 && y==300.0) x+=speed;// up at (250,300)
       else if(x==250.0 && y>200.0) y-=speed;//right at (250,200)
       else x+=speed;
+    }else if(scene == 13){
+      if(id==1){
+        if(x==120.0 && y>170.0) y-=speed;     // up at (100,200)
+        else if(x<290.0 && y==130.0) x+=speed; // right at (100,150)
+        else if(x==290.0 && y<280.0) y+=speed;// dowon at (150,150)
+        else x+=speed;
+      }
+      else if(id==2){
+        if(x==290.0 && y<280.0) y+=speed;     // up at (100,200)
+        else  x+=speed;
+      }
     }
     //println(x,y);
   }
