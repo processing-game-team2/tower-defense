@@ -17,13 +17,13 @@ class Enemy {
     //println(x);
   }
   void move2(){//for second level
-    println(x,y);
-    if(x<=100.0 && y==200.0) x+=speed;
-    else if(x==100.0 && y>=150.0) y-=speed;
-    else if(x<=150.0 && y==150.0) x+=speed;
-    else if(x==150.0 && y<=300.0) y+=speed+0.1;
-    else if(x<=250.0 && y==300.0) x+=speed;
-    else if(x==250.0 && y>=200.0) y-=speed;
+    //println(x,y);
+    if(x<100.0 && y==200.0) x+=speed;     // up at (100,200)
+    else if(x==100.0 && y>150.0) y-=speed; // right at (100,150)
+    else if(x<150.0 && y==150.0) x+=speed;// dowon at (150,150)
+    else if(x==150.0 && y<300.0) y+=speed;// right at (150,300)
+    else if(x<250.0 && y==300.0) x+=speed;// up at (250,300)
+    else if(x==250.0 && y>200.0) y-=speed;//right at (250,200)
     else x+=speed;
   }
   void display() {
@@ -100,7 +100,7 @@ class Tower {
 
   // 畫防禦塔
   void display() {
-    if(type == 1){
+    if(type == 1){//第一種
       fill(0, 0, 255);
       stroke(0);
       strokeWeight(2);
@@ -111,7 +111,7 @@ class Tower {
       strokeWeight(1);
       ellipse(x, y, range * 2, range * 2);  // 畫出範圍
     }
-    else{
+    else{//第二種
       noFill();
       stroke(0);
       strokeWeight(2);

@@ -2,11 +2,12 @@ void game(){
   background(255);
 
   // 顯示生命值與金幣數
+  //leftenemy=enemyNumber
   fill(0);
   textSize(16);
   text("生命值: " + lives, width - 120, 30);
   text("金幣: " + coins, width - 120, 50);
-  text("消滅敵人數: "+kills, width-120, 70);
+  text("剩餘敵人數: "+(enemyNumber[scene-2]-kills), width-120, 70);
 
   // 生成敵人
   if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {
