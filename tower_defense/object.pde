@@ -16,18 +16,25 @@ class Enemy {
     x += speed;
     //println(x);
   }
-  void move2(){//for second level
+  void move(){//for second level
+    if(scene == 11){
+      x += speed;
+    }
+    else if(scene == 12){
+      if(x<100.0 && y==200.0) x+=speed;     // up at (100,200)
+      else if(x==100.0 && y>150.0) y-=speed; // right at (100,150)
+      else if(x<150.0 && y==150.0) x+=speed;// dowon at (150,150)
+      else if(x==150.0 && y<300.0) y+=speed;// right at (150,300)
+      else if(x<250.0 && y==300.0) x+=speed;// up at (250,300)
+      else if(x==250.0 && y>200.0) y-=speed;//right at (250,200)
+      else x+=speed;
+    }
     //println(x,y);
-    if(x<100.0 && y==200.0) x+=speed;     // up at (100,200)
-    else if(x==100.0 && y>150.0) y-=speed; // right at (100,150)
-    else if(x<150.0 && y==150.0) x+=speed;// dowon at (150,150)
-    else if(x==150.0 && y<300.0) y+=speed;// right at (150,300)
-    else if(x<250.0 && y==300.0) x+=speed;// up at (250,300)
-    else if(x==250.0 && y>200.0) y-=speed;//right at (250,200)
-    else x+=speed;
   }
   void display() {
     fill(255, 0, 0);
+    stroke(0);
+    strokeWeight(2);
     ellipse(x, y, 20, 20); // 用紅色的圓圈代表敵人
   }
 }
@@ -53,7 +60,7 @@ class Tower {
     if(type!=0)return;
     // 1普通塔，花費3
     if(t == 1 && type == 0 && coins >= 3){
-      println("type1");
+      // println("type1");
       range = 100;
       damage = 10;
       rateOfFire = 30;  // 每隔 30 幀攻擊一次
@@ -108,7 +115,7 @@ class Tower {
 
       noFill();
       stroke(0, 0, 255, 100);
-      strokeWeight(1);
+      strokeWeight(2);
       ellipse(x, y, range * 2, range * 2);  // 畫出範圍
     }
     else{//第二種

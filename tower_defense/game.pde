@@ -1,16 +1,20 @@
 void game(){
   //background
-  if(scene==2) image(level1,0,0,600,400);
-  if(scene==3) image(level2,0,0,600,400);
-  if(scene==4) image(level3,0,0,600,400);
+  if(scene==11) background(level1);
+  if(scene==12) background(level2);
+  if(scene==13) background(level3);
   
   // 顯示生命值與金幣數
   //leftenemy=enemyNumber
   fill(0);
   textSize(16);
-  text("生命值: " + lives, width - 120, 30);
-  text("金幣: " + coins, width - 120, 50);
-  text("剩餘敵人數: "+(enemyNumber[scene-2]-kills), width-120, 70);
+  textAlign(RIGHT,TOP);
+  text(String.format("生命值:%2d", lives), width-20, 30);
+  // text("生命值: " + lives, width-20, 30);
+  text(String.format("金幣:%2d", coins), width-20, 50);
+  text(String.format("剩餘敵人數:%2d", enemyNumber[scene-11]-kills), width-20, 70);
+  // text("金幣: " + coins, width-20, 50);
+  // text("剩餘敵人數: "+(enemyNumber[scene-11]-kills), width-20, 70);
   
   // 生成敵人
   if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {
@@ -21,8 +25,7 @@ void game(){
   // 更新和顯示敵人，及敵人移動
   for (int i = enemies.size() - 1; i >= 0; i--) {
     Enemy enemy = enemies.get(i);
-    if(scene==2) enemy.move1();//first level
-    if(scene==3) enemy.move2();//second level
+    enemy.move();
     enemy.display();
 
     // 如果敵人到達螢幕右邊，扣除玩家生命值並移除敵人
@@ -56,9 +59,13 @@ void game(){
   // 檢查遊戲是否結束（勝利或失敗）
   if (lives <= 0) {
     endmessage = "DEFEAT";
-    scene = 1;
+    scene = 5;
   }
-  if (kills >= enemyNumber[level]) {
+  else if (kills >= enemyNumber[level]){//game end
+    endmessage = "VICTORY";
+    scene = 5;
+  }
+  /*if (kills >= enemyNumber[level]) {
     level++;
     if(level==1){
       //println("check");
@@ -75,13 +82,13 @@ void game(){
       endmessage = "VICTORY";
       scene = 1;
     }
-  }
+  }*/
 }
 
 // 遊戲初始化
 void game_init(){
   // 新增防禦塔
-  for(int i[] : towerPos[scene-2]){
+  for(int i[] : towerPos[scene-11]){
     towers.add(new Tower(i[0], i[1]));
   }
   lives = 3;
@@ -89,4 +96,5 @@ void game_init(){
   kills = 0;
   enemySpawnInterval = 3000;
   lastEnemySpawnTime = 0;
+  // println("init complete");
 }
