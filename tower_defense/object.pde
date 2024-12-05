@@ -9,7 +9,8 @@ class Enemy {
     this.x = startX;
     this.y = startY;
     this.speed = speed;
-    this.health = 40;
+    if(id==3.0) this.health = 40;
+    if(id==4.0) this.health = 50;
   }
 
   void move1() {//for first level

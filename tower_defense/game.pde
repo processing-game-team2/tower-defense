@@ -29,9 +29,13 @@ void game(){
           level3_entry=1;
           lastEnemySpawnTime = millis();
         }
-    }else{                                            // for level 1 and 2
-    enemies.add(new Enemy(1.0, 0, 195, 2));           // (敵人初始x,敵人初始y,speed)
-    lastEnemySpawnTime = millis();                    // 更新敵人生成時間
+    }else if(scene==11){                                // for level 1
+      enemies.add(new Enemy(3.0, 0, 195, 2));           // (敵人初始x,敵人初始y,speed)
+      lastEnemySpawnTime = millis();                    // 更新敵人生成時間
+    }
+    else if(scene==12){                                 // for level 2
+      enemies.add(new Enemy(4.0, 0, 195, 2));           // (敵人初始x,敵人初始y,speed)
+      lastEnemySpawnTime = millis();                    // 更新敵人生成時間      
     }
   }
 
