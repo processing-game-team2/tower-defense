@@ -3,6 +3,7 @@ ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 PFont TCfont;
 PImage level1,level2,level3;
+PImage previous;
 int lives = 3;                  // 玩家初始生命值
 int coins = 10;                 // 玩家金幣數
 int kills = 0;                  // 玩家消滅怪物數
@@ -11,9 +12,10 @@ int level = 0;                  // 目前關卡
 int enemySpawnInterval = 3000;  // 敵人產出間隔時間（10 秒）
 int lastEnemySpawnTime = 0;     // 上次敵人產生的時間
 int enemyNumber[] = {3,15,20};  // 勝利條件：每一關有多少數量的敵人
-int scene = 0;                  // 0Recap 1開始畫面 2難易選單 3Rule 4About 5end 11~13遊戲畫面
+int scene = 0;                  // 0Recap 1TitleScreen 2menu 3Rule 4About 5end 11~13game
 int start=0;                    // 確認使用者是否已經點選開始
 int level3_entry=1;
+float scrollSpeed=2,yOffset=0;
                       //first level                              second level
 int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}},
 {{50,150},{125,100},{200,200},{200,250},{300,150},{400,150}},
@@ -36,18 +38,23 @@ void setup() {
 void draw() {
   if(scene == 0){
     Recap();
+    Copyright();
   }
   else if(scene == 1){
     TitleScreen();
+    Copyright();
   }
   else if(scene == 2){
     menu();
+    Copyright();
   }
   else if(scene == 3){
     Rule();
+    Copyright();
   }
   else if(scene == 4){
     About();
+    Copyright();
   }
   else if(scene == 5){
     end();
@@ -55,28 +62,56 @@ void draw() {
   else{
     game();
   }
-  // Copyright();
+  
 }
 
 void mousePressed() {
   // 開始畫面點擊事件
-  if(scene == 2){
-    // if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height/2 - 50 && mouseY < height/2 + 50 && start==0){
-    //   start=1;
-    //   menu();
-    // }
-    if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height - 375 && mouseY < height-275){//選擇第一關
+  if(scene == 2 || scene == 3 || scene == 4){
+    if(mouseX>=25 && mouseX<=75 && mouseY>=35 && mouseY<=105){
+      scene = 1;
+    }
+  }
+
+  if(scene == 0){
+    if(mouseX >= width - 100 && mouseX <= width - 20 && mouseY >= height - 50 && mouseY <= height - 20){
+      scene = 1;
+    }
+  }
+
+  else if(scene == 1){
+    if(mouseX>=width/2.0-65 && mouseX<=width/2.0+65 && mouseY>=height/2+65 && mouseY<=height/2+135){
+        scene = 2;
+    } 
+    if(mouseX>=width/4.0-65 && mouseX<=width/4.0+65 && mouseY>=height/2+65 && mouseY<=height/2+135){
+        scene = 3;
+    } 
+    if(mouseX>=width*3/4.0-65 && mouseX<=width*3/4.0+65 && mouseY>=height/2+65 && mouseY<=height/2+135){
+        scene = 4;
+    } 
+  }
+
+  else if(scene == 2){
+    if(mouseX >= width/2 - 100 && mouseX <= width/2 + 100 && mouseY >= height - 375 && mouseY <= height-275){//選擇第一關
       scene=11;
-      // println("game11");
       game_init();
     }
-    else if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height - 250 && mouseY < height-150){//選擇第二關
+    else if(mouseX >= width/2 - 100 && mouseX <= width/2 + 100 && mouseY >= height - 250 && mouseY <= height-150){//選擇第二關
       scene=12;
       game_init();
     }
-    else if(mouseX > width/2 - 100 && mouseX < width/2 + 100 && mouseY > height-125 && mouseY < height-25){//選擇第三關
+    else if(mouseX >= width/2 - 100 && mouseX <= width/2 + 100 && mouseY >= height-125 && mouseY <= height-25){//選擇第三關
       scene=13;
       game_init();
+    }
+  }
+
+  else if(scene == 5){
+    if(mouseX >= 180 && mouseX <= 280 && mouseY >= 250 && mouseY <= 320){ //回主頁
+      scene=1;
+    }
+    if(mouseX >= 320 && mouseX <= 420 && mouseY >= 250 && mouseY <= 320){ //離開
+      exit();
     }
   }
 

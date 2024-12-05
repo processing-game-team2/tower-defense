@@ -149,7 +149,7 @@ class Tower {
 
     // 點擊選單，建立防禦塔
     if(option == true){
-      if(nowX > x-10 && nowX < x+10 && nowY > y-35 && nowY < y-15){
+      if(nowX >= x-10 && nowX <= x+10 && nowY >= y-35 && nowY <= y-15){
         type_change(1);
         option = false;
       }

@@ -3,6 +3,7 @@ void game(){
   if(scene==11) background(level1);
   if(scene==12) background(level2);
   if(scene==13) background(level3);
+  rectMode(CORNER); 
   
   // 顯示生命值與金幣數
   //leftenemy=enemyNumber
@@ -77,29 +78,14 @@ void game(){
     endmessage = "VICTORY";
     scene = 5;
   }
-  /*if (kills >= enemyNumber[level]) {
-    level++;
-    if(level==1){
-      //println("check");
-      start=0;
-      scene=0;
-      menu();
-    }
-    if(level==2){
-      start=0;
-      scene=0;
-      menu();
-    }
-    if(level==3){//game end
-      endmessage = "VICTORY";
-      scene = 1;
-    }
-  }*/
 }
 
 // 遊戲初始化
 void game_init(){
   // 新增防禦塔
+  towers.clear();
+  enemies.clear();
+  bullets.clear();
   for(int i[] : towerPos[scene-11]){
     towers.add(new Tower(i[0], i[1]));
   }
@@ -108,5 +94,4 @@ void game_init(){
   kills = 0;
   enemySpawnInterval = 3000;
   lastEnemySpawnTime = 0;
-  // println("init complete");
 }
