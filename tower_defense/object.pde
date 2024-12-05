@@ -9,6 +9,8 @@ class Enemy {
     this.x = startX;
     this.y = startY;
     this.speed = speed;
+    if(id==1.0) this.health = 40;
+    if(id==2.0) this.health = 50;
     if(id==3.0) this.health = 40;
     if(id==4.0) this.health = 50;
   }
