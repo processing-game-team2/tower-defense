@@ -76,7 +76,7 @@ class Tower {
     // 1普通塔，花費3
     if(t == 1 && type == 0 && coins >= 3){
       // println("type1");
-      range = 100;
+      range = 120;
       damage = 10;
       rateOfFire = 30;  // 每隔 30 幀攻擊一次
       fireCooldown = 0;
@@ -114,9 +114,16 @@ class Tower {
       // circle(x+25, y-25, 20);
       circle(x, y-25, 20);
       textSize(20);
-      fill(0);
-      textAlign(CENTER, CENTER);
-      text("+", x, y-26);
+      if(coins >= 3){
+        fill(0, 0, 255);
+        textAlign(CENTER, CENTER);
+        text("+", x, y-26);
+      }
+      else{
+        fill(255, 0, 0);
+        textAlign(CENTER, CENTER);
+        text("X", x, y-26);
+      }
       // text("2", x+25, y-25);
     }
   }
@@ -124,17 +131,19 @@ class Tower {
   // 畫防禦塔
   void display() {
     if(type == 1){//第一種
-      fill(0, 0, 255);
-      stroke(0);
-      strokeWeight(2);
-      rect(x-10, y-10, 20, 20);  // 用藍色的方形代表防禦塔
+      // fill(0, 0, 255);
+      // stroke(0);
+      // strokeWeight(2);
+      // rect(x-10, y-10, 20, 20);  // 用藍色的方形代表防禦塔
+      imageMode(CENTER);
+      image(tower_img, x, y-20, 40, 80);
 
       noFill();
       stroke(0, 0, 255, 100);
       strokeWeight(2);
       ellipse(x, y, range * 2, range * 2);  // 畫出範圍
     }
-    else{//第二種
+    else{//還沒蓋
       noFill();
       stroke(0);
       strokeWeight(2);
@@ -174,12 +183,12 @@ class Bullet{
   int show(){
     time--;
     float x = to.x + (from.x - to.x)/totaltime*(float)time;
-    float y = to.y + (from.y - to.y)/totaltime*(float)time;
+    float y = to.y + (from.y-50 - to.y)/totaltime*(float)time;
     fill(0);
     circle(x,y,8);
     stroke(0);
     strokeWeight(1);
-    // line(from.x, from.y, to.x, to.y);
+    // line(from.x, from.y-50, to.x, to.y);
     return time;
   }
 }
