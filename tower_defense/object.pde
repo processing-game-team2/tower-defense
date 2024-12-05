@@ -47,10 +47,20 @@ class Enemy {
     //println(x,y);
   }
   void display() {
-    fill(255, 0, 0);
-    stroke(0);
-    strokeWeight(2);
-    ellipse(x, y, 20, 20); // 用紅色的圓圈代表敵人
+    if(id == 1.0 || id == 3.0){
+      imageMode(CENTER);
+      image(chill_enemy, x, y-20, 60, 60);
+      noFill();
+      stroke(0, 0, 255, 100);
+      strokeWeight(2);
+    }
+    else if(id == 2.0 || id == 4.0){//還沒蓋
+      imageMode(CENTER);
+      image(usagi_enemy, x, y-20, 60, 60);
+      noFill();
+      stroke(0, 0, 255, 100);
+      strokeWeight(2);
+    }
   }
 }
 class Tower {
@@ -172,7 +182,7 @@ class Tower {
 class Bullet{
   Tower from; // 發射的防禦塔
   Enemy to; // 目標敵人
-  int time, totaltime = 10; // 從防禦塔到敵人需要幾幀的時間
+  int time, totaltime = 20; // 從防禦塔到敵人需要幾幀的時間
   Bullet(Tower from, Enemy to){
     this.from = from;
     this.to = to;
@@ -185,9 +195,11 @@ class Bullet{
     float x = to.x + (from.x - to.x)/totaltime*(float)time;
     float y = to.y + (from.y-50 - to.y)/totaltime*(float)time;
     fill(0);
-    circle(x,y,8);
-    stroke(0);
-    strokeWeight(1);
+    imageMode(CENTER);
+    image(bubble, x, y, 30, 30);
+    noFill();
+    stroke(0, 0, 255, 100);
+    strokeWeight(2);
     // line(from.x, from.y-50, to.x, to.y);
     return time;
   }

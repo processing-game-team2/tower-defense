@@ -15,6 +15,8 @@ void TitleScreen(){
     noStroke();
     rectMode(CENTER);
     textAlign(CENTER,CENTER);
+    imageMode(CENTER);
+    image(title,width/2,height/2-50,500,200);
     fill(#cca87c);
     rect(width/4.0,height/2+100,130,70,25);
     rect(width/2.0,height/2+100,130,70,25);

@@ -2,7 +2,7 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 PFont TCfont;
-PImage level1, level2, level3, tower_img;
+PImage level1, level2, level3, tower_img, chill_enemy, usagi_enemy, bubble,title;
 PImage previous;
 int lives = 3;                  // 玩家初始生命值
 int coins = 6;                  // 玩家金幣數
@@ -26,10 +26,14 @@ void setup() {
   size(600, 400, P3D);
   TCfont = createFont("NaikaiFont-Bold.ttf", 50); //建立字形庫
   textFont(TCfont);
+  title = loadImage("title.png");
   level1 = loadImage("level1.png");
   level2 = loadImage("level2.png");
   level3 = loadImage("level3.png");
   tower_img = loadImage("tower.png");
+  chill_enemy = loadImage("chill_enemy.png");
+  usagi_enemy = loadImage("usagi_enemy.png");
+  bubble = loadImage("bubble.png");
   scene = 0;
   yOffset=height;
     //Title=loadImage("title.png");
