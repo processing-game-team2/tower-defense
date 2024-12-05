@@ -11,11 +11,8 @@ void game(){
   textSize(16);
   textAlign(RIGHT,TOP);
   text(String.format("生命值:%2d", lives), width-20, 30);
-  // text("生命值: " + lives, width-20, 30);
   text(String.format("金幣:%2d", coins), width-20, 50);
   text(String.format("剩餘敵人數:%2d", enemyNumber[scene-11]-kills), width-20, 70);
-  // text("金幣: " + coins, width-20, 50);
-  // text("剩餘敵人數: "+(enemyNumber[scene-11]-kills), width-20, 70);
   
   // 生成敵人
   if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {

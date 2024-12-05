@@ -50,16 +50,27 @@ class Enemy {
     if(id == 1.0 || id == 3.0){
       imageMode(CENTER);
       image(chill_enemy, x, y-20, 60, 60);
-      noFill();
-      stroke(0, 0, 255, 100);
-      strokeWeight(2);
+      rectMode(CORNER);
+      fill(255);
+      stroke(0);
+      strokeWeight(1);
+      rect(x-25, y-60, 50, 5);
+      fill(255, 0, 0);
+      noStroke();
+      rect(x-25, y-60, 50*((float)health/40), 5);
+
     }
-    else if(id == 2.0 || id == 4.0){//還沒蓋
+    else if(id == 2.0 || id == 4.0){
       imageMode(CENTER);
       image(usagi_enemy, x, y-20, 60, 60);
-      noFill();
-      stroke(0, 0, 255, 100);
-      strokeWeight(2);
+      rectMode(CORNER);
+      fill(255);
+      stroke(0);
+      strokeWeight(1);
+      rect(x-25, y-60, 50, 5);
+      fill(255, 0, 0);
+      noStroke();
+      rect(x-25, y-60, 50*((float)health/50), 5);
     }
   }
 }
@@ -141,10 +152,6 @@ class Tower {
   // 畫防禦塔
   void display() {
     if(type == 1){//第一種
-      // fill(0, 0, 255);
-      // stroke(0);
-      // strokeWeight(2);
-      // rect(x-10, y-10, 20, 20);  // 用藍色的方形代表防禦塔
       imageMode(CENTER);
       image(tower_img, x, y-20, 40, 80);
 
