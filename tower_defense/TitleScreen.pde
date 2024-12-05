@@ -8,6 +8,15 @@ String crawlText = "很久以前有一位叫卡皮巴拉的國王\n"
                  + "他的執念匯聚了周圍的不祥之氣\n"
                  + "聚集的亡魂展開攻勢，朝著他曾風光無比的\n"
                  + "「城堡」\n";
+                 
+String rule = "玩法:在設置點中放置防禦塔攻擊敵人。\n"
++"機制:玩家有三條血。當敵人到達終點將扣玩家血量。\n\n"
++"第一關:\n"
++"目標:消滅3隻敵人。\n\n"
++"第二關:\n"
++"目標:消滅15隻敵人。\n\n"
++"第三關:\n"
++"目標:消滅20隻敵人。" ;
 
 void TitleScreen(){
     background(#858585);//Change to title screen background
@@ -98,10 +107,15 @@ void Rule(){
     textAlign(CENTER,CENTER);
     textSize(28);
     text("規則說明",width/2.0,50);
+    fill(0);
+    textSize(20);
+    //textAlign(CENTER,CENTER);
+    text(rule,300,240);
 }
 void Copyright(){
     textAlign(LEFT,BOTTOM);
     fill(0);
     textSize(15);
+    text("僅供教育使用", 10, height-30);
     text("Copyright © All Rights Reserved", 10, height-10);
 }

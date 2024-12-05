@@ -55,7 +55,6 @@ void draw() {
   }
   else if(scene == 3){//rule
     Rule();
-    Copyright();
   }
   else if(scene == 4){//about us
     About();
