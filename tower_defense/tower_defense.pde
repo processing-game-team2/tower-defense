@@ -5,7 +5,7 @@ PFont TCfont;
 PImage level1,level2,level3;
 PImage previous;
 int lives = 3;                  // 玩家初始生命值
-int coins = 10;                 // 玩家金幣數
+int coins = 6;                 // 玩家金幣數
 int kills = 0;                  // 玩家消滅怪物數
 int leftenemy=0;                // 剩餘敵人數
 int level = 0;                  // 目前關卡
@@ -16,10 +16,10 @@ int scene = 0;                  // 0Recap 1TitleScreen 2menu 3Rule 4About 5end 1
 int start=0;                    // 確認使用者是否已經點選開始
 int level3_entry=1;
 float scrollSpeed=2,yOffset=0;
-                      //first level                              second level
-int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}},
-{{50,150},{125,100},{200,200},{200,250},{300,150},{400,150}},
-{{210,100},{40,170},{365,200},{210,250},{300,350}}}; // 防禦塔位置
+// 防禦塔位置
+int towerPos[][][] = {{{200,150},{300,250},{400,150},{150,250}},//level 1
+{{80,85},{280,45},{230,300},{505,345},{500,130}},   //level 2
+{{210,100},{40,170},{365,200},{210,250},{300,350}}};            //level 3
 String endmessage = "";         //遊戲結束訊息
 
 void setup() {
@@ -44,19 +44,19 @@ void draw() {
     TitleScreen();
     Copyright();
   }
-  else if(scene == 2){
+  else if(scene == 2){//start and choose level
     menu();
     Copyright();
   }
-  else if(scene == 3){
+  else if(scene == 3){//rule
     Rule();
     Copyright();
   }
-  else if(scene == 4){
+  else if(scene == 4){//about us
     About();
     Copyright();
   }
-  else if(scene == 5){
+  else if(scene == 5){//end
     end();
   }
   else{

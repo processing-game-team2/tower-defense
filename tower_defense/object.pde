@@ -18,18 +18,18 @@ class Enemy {
     //println(x);
   }
   void move(){//for second level
-    if(scene == 11){
+    if(scene == 11){//level 1
       x += speed;
     }
-    else if(scene == 12){
-      if(x<100.0 && y==200.0) x+=speed;     // up at (100,200)
-      else if(x==100.0 && y>150.0) y-=speed; // right at (100,150)
-      else if(x<150.0 && y==150.0) x+=speed;// dowon at (150,150)
-      else if(x==150.0 && y<300.0) y+=speed;// right at (150,300)
-      else if(x<250.0 && y==300.0) x+=speed;// up at (250,300)
-      else if(x==250.0 && y>200.0) y-=speed;//right at (250,200)
+    else if(scene == 12){//level 2
+      if(x<140.0 && y==195.0) x+=speed;     // up at (100,200)
+      else if(x==140.0 && y>110.0) y-=speed;// right at (100,150)
+      else if(x<290.0 && y==110.0) x+=speed;// dowon at (150,150)
+      else if(x==290.0 && y<300.0) y+=speed;// right at (150,300)
+      else if(x<450.0 && y==300.0) x+=speed;// up at (250,300)
+      else if(x==450.0 && y>180.0) y-=speed;// right at (250,200)
       else x+=speed;
-    }else if(scene == 13){
+    }else if(scene == 13){//level 3
       if(id==1){
         if(x==120.0 && y>170.0) y-=speed;     // up at (100,200)
         else if(x<290.0 && y==130.0) x+=speed; // right at (100,150)

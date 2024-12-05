@@ -19,19 +19,19 @@ void game(){
   
   // 生成敵人
   if (millis() - lastEnemySpawnTime >= enemySpawnInterval) {
-    if(scene==13){
+    if(scene==13){                                      // for level 3
         if(level3_entry==1) {
-          enemies.add(new Enemy(1.0, 120.0, 500.0, 2)); //(敵人初始x,敵人初始y,speed)
+          enemies.add(new Enemy(1.0, 120.0, 500.0, 2));// (敵人初始x,敵人初始y,speed)
           level3_entry=2;
           lastEnemySpawnTime = millis();
         }else if(level3_entry==2){
-          enemies.add(new Enemy(2.0, 290.0, 0.0, 2)); //(敵人初始x,敵人初始y,speed)
+          enemies.add(new Enemy(2.0, 290.0, 0.0, 2)); // (敵人初始x,敵人初始y,speed)
           level3_entry=1;
           lastEnemySpawnTime = millis();
         }
-    }else{
-    enemies.add(new Enemy(1.0, 0, 200, 2)); //(敵人初始x,敵人初始y,speed)
-    lastEnemySpawnTime = millis();         // 更新敵人生成時間
+    }else{                                            // for level 1 and 2
+    enemies.add(new Enemy(1.0, 0, 195, 2));           // (敵人初始x,敵人初始y,speed)
+    lastEnemySpawnTime = millis();                    // 更新敵人生成時間
     }
   }
 
@@ -86,11 +86,14 @@ void game_init(){
   towers.clear();
   enemies.clear();
   bullets.clear();
+  /*for(int i[] : towerPos[scene-11]){
+    towers.remove(i);
+  }*/
   for(int i[] : towerPos[scene-11]){
     towers.add(new Tower(i[0], i[1]));
   }
   lives = 3;
-  coins = 10;
+  coins = 6;
   kills = 0;
   enemySpawnInterval = 3000;
   lastEnemySpawnTime = 0;
