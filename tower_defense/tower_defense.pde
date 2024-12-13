@@ -47,8 +47,10 @@ void setup() {
   
   minim = new Minim(this);
   in = minim. loadFile("clickSound.mp3");
+  in.setGain(-20);
   minim = new Minim(this);
   bump = minim. loadFile("bomb.mp3");
+  bump.setGain(-20);
 }
 
 void draw() {
