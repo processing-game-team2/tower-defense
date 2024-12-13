@@ -65,6 +65,8 @@ void game(){
   for(int i = bullets.size() - 1; i >= 0; i--){
     Bullet bullet = bullets.get(i);
     if(bullet.show() <= 0){ //子彈射到敵人
+      bump.rewind();
+      bump.play();
       bullet.to.health -= bullet.from.damage;
       bullets.remove(i);
     }

@@ -4,6 +4,12 @@ ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 PFont TCfont;
 PImage level1, level2, level3, tower_img, chill_enemy, usagi_enemy, bubble,title;
 PImage previous;
+
+import ddf.minim.*;             //deal with sound
+Minim minim;
+AudioPlayer in;                 //click sound
+AudioPlayer bump;               //bomb sound
+
 int lives = 3;                  // 玩家初始生命值
 int coins = 6;                  // 玩家金幣數
 int kills = 0;                  // 玩家消滅怪物數
@@ -38,6 +44,11 @@ void setup() {
   yOffset=height;
     //Title=loadImage("title.png");
   previous=loadImage("previous.png");
+  
+  minim = new Minim(this);
+  in = minim. loadFile("clickSound.mp3");
+  minim = new Minim(this);
+  bump = minim. loadFile("bomb.mp3");
 }
 
 void draw() {
@@ -70,41 +81,59 @@ void draw() {
 }
 
 void mousePressed() {
+  in.pause();
   // 開始畫面點擊事件
   if(scene == 2 || scene == 3 || scene == 4){
-    if(mouseX>=25 && mouseX<=75 && mouseY>=35 && mouseY<=105){
+    if(mouseX>=25 && mouseX<=75 && mouseY>=35 && mouseY<=105){//返回
+      in.rewind();
+      in.play();
       scene = 1;
     }
   }
 
   if(scene == 0){
-    if(mouseX >= width - 100 && mouseX <= width - 20 && mouseY >= height - 50 && mouseY <= height - 20){
+    if(mouseX >= width - 100 && mouseX <= width - 20 && mouseY >= height - 50 && mouseY <= height - 20){//跳過
+      in.rewind();
+      in.play();
       scene = 1;
+      
     }
   }
 
   else if(scene == 1){
     if(mouseX>=width/2.0-65 && mouseX<=width/2.0+65 && mouseY>=height/2+65 && mouseY<=height/2+135){
+        in.rewind();
+        in.play();
         scene = 2;
     } 
     if(mouseX>=width/4.0-65 && mouseX<=width/4.0+65 && mouseY>=height/2+65 && mouseY<=height/2+135){
+        in.rewind();
+        in.play();
         scene = 3;
     } 
     if(mouseX>=width*3/4.0-65 && mouseX<=width*3/4.0+65 && mouseY>=height/2+65 && mouseY<=height/2+135){
+        in.rewind();
+        in.play();
         scene = 4;
     } 
   }
 
   else if(scene == 2){
     if(mouseX >= width/2 - 100 && mouseX <= width/2 + 100 && mouseY >= height - 375 && mouseY <= height-275){//選擇第一關
+      in.rewind();
+      in.play();
       scene=11;
       game_init();
     }
     else if(mouseX >= width/2 - 100 && mouseX <= width/2 + 100 && mouseY >= height - 250 && mouseY <= height-150){//選擇第二關
+      in.rewind();
+      in.play();
       scene=12;
       game_init();
     }
     else if(mouseX >= width/2 - 100 && mouseX <= width/2 + 100 && mouseY >= height-125 && mouseY <= height-25){//選擇第三關
+      in.rewind();
+      in.play();
       scene=13;
       game_init();
     }
@@ -112,9 +141,13 @@ void mousePressed() {
 
   else if(scene == 5){
     if(mouseX >= 180 && mouseX <= 280 && mouseY >= 250 && mouseY <= 320){ //回主頁
+      in.rewind();
+      in.play();
       scene=1;
     }
     if(mouseX >= 320 && mouseX <= 420 && mouseY >= 250 && mouseY <= 320){ //離開
+      in.rewind();
+      in.play();
       exit();
     }
   }
